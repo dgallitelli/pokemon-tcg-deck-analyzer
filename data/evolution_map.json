@@ -1,0 +1,1482 @@
+{
+  "evolves_from": {
+    "Aerodactyl": "Antique Old Amber",
+    "Alakazam": "Kadabra",
+    "Aegislash": "Doublade",
+    "Alakazam ex": "Kadabra",
+    "Annihilape": "Primeape",
+    "Archaludon": "Duraludon",
+    "Archaludon ex": "Duraludon",
+    "Alolan Exeggutor ex": "Exeggcute",
+    "Arboliva ex": "Dolliv",
+    "Azumarill": "Marill",
+    "Armarouge": "Charcadet",
+    "Arctibax": "Frigibax",
+    "Azumarill ex": "Marill",
+    "Bayleef": "Chikorita",
+    "Barbaracle": "Binacle",
+    "Banette ex": "Shuppet",
+    "Baxcalibur": "Arctibax",
+    "Blaziken": "Combusken",
+    "Bisharp": "Pawniard",
+    "Blaziken ex": "Combusken",
+    "Blissey ex": "Chansey",
+    "Bronzong": "Bronzor",
+    "Ceruledge": "Charcadet",
+    "Ceruledge ex": "Charcadet",
+    "Charmeleon": "Charmander",
+    "Chandelure": "Lampent",
+    "Charizard ex": "Charmeleon",
+    "Cinderace": "Raboot",
+    "Cinderace ex": "Raboot",
+    "Combusken": "Torchic",
+    "Crabominable": "Crabrawler",
+    "Conkeldurr": "Gurdurr",
+    "Crustle": "Dwebble",
+    "Croconaw": "Totodile",
+    "Cynthia's Gabite": "Cynthia's Gible",
+    "Cynthia's Garchomp ex": "Cynthia's Gabite",
+    "Dartrix": "Rowlet",
+    "Dachsbun ex": "Fidough",
+    "Cynthia's Roserade": "Cynthia's Roselia",
+    "Dewott": "Oshawott",
+    "Decidueye ex": "Dartrix",
+    "Dragonair": "Dratini",
+    "Dodrio": "Doduo",
+    "Doublade": "Honedge",
+    "Drakloak": "Dreepy",
+    "Dolliv": "Smoliv",
+    "Dipplin": "Applin",
+    "Dragapult ex": "Drakloak",
+    "Drifblim": "Drifloon",
+    "Dudunsparce": "Dunsparce",
+    "Dudunsparce ex": "Dunsparce",
+    "Dusknoir": "Dusclops",
+    "Dusclops": "Duskull",
+    "Eelektrik": "Tynamo",
+    "Empoleon ex": "Prinplup",
+    "Erika's Victreebel": "Erika's Weepinbell",
+    "Erika's Gloom": "Erika's Oddish",
+    "Erika's Weepinbell": "Erika's Bellsprout",
+    "Espeon ex": "Eevee",
+    "Espathra ex": "Flittle",
+    "Ethan's Magcargo": "Ethan's Slugma",
+    "Erika's Vileplume ex": "Erika's Gloom",
+    "Exeggutor": "Exeggcute",
+    "Ethan's Quilava": "Ethan's Cyndaquil",
+    "Ethan's Typhlosion": "Ethan's Quilava",
+    "Excadrill ex": "Drilbur",
+    "Feraligatr": "Croconaw",
+    "Farigiraf ex": "Girafarig",
+    "Mega Feraligatr ex": "Croconaw",
+    "Flygon ex": "Vibrava",
+    "Flareon ex": "Eevee",
+    "Floragato": "Sprigatito",
+    "Forretress ex": "Pineco",
+    "Froslass": "Snorunt",
+    "Gabite": "Gible",
+    "Frogadier": "Froakie",
+    "Froslass ex": "Snorunt",
+    "Mega Froslass ex": "Snorunt",
+    "Galvantula": "Joltik",
+    "Galarian Obstagoon": "Galarian Linoone",
+    "Gardevoir ex": "Kirlia",
+    "Garganacl": "Naclstack",
+    "Garchomp ex": "Gabite",
+    "Gholdengo ex": "Gimmighoul",
+    "Gholdengo": "Gimmighoul",
+    "Galvantula ex": "Joltik",
+    "Mega Gardevoir ex": "Kirlia",
+    "Gloom": "Oddish",
+    "Glalie": "Snorunt",
+    "Glaceon ex": "Eevee",
+    "Golduck": "Psyduck",
+    "Hariyama": "Makuhita",
+    "Gurdurr": "Timburr",
+    "Gumshoos": "Yungoos",
+    "Greninja ex": "Frogadier",
+    "Haunter": "Gastly",
+    "Haxorus": "Fraxure",
+    "Hop's Dubwool": "Hop's Wooloo",
+    "Hydrapple ex": "Dipplin",
+    "Hydreigon ex": "Zweilous",
+    "Hop's Trevenant": "Hop's Phantump",
+    "Inteleon": "Drizzile",
+    "Iono's Bellibolt ex": "Iono's Tadbulb",
+    "Iono's Kilowattrel": "Iono's Wattrel",
+    "Ivysaur": "Bulbasaur",
+    "Kadabra": "Abra",
+    "Kingambit": "Bisharp",
+    "Jellicent ex": "Frillish",
+    "Kirlia": "Ralts",
+    "Lampent": "Litwick",
+    "Kingdra ex": "Seadra",
+    "Leafeon ex": "Eevee",
+    "Lilligant": "Petilil",
+    "Liepard": "Purrloin",
+    "Lucario": "Riolu",
+    "Luxray": "Luxio",
+    "Lycanroc": "Rockruff",
+    "Mega Lucario ex": "Riolu",
+    "Mamoswine": "Piloswine",
+    "Magneton": "Magnemite",
+    "Mamoswine ex": "Piloswine",
+    "Marnie's Morgrem": "Marnie's Impidimp",
+    "Marnie's Grimmsnarl ex": "Marnie's Morgrem",
+    "Mega Abomasnow ex": "Snover",
+    "Mega Charizard X ex": "Charmeleon",
+    "Mega Charizard Y ex": "Charmeleon",
+    "Mega Gengar ex": "Haunter",
+    "Mega Lopunny ex": "Buneary",
+    "Mega Eelektross ex": "Eelektrik",
+    "Mega Dragonite ex": "Dragonair",
+    "Mega Venusaur ex": "Ivysaur",
+    "Mega Manectric ex": "Electrike",
+    "Mega Sharpedo ex": "Carvanha",
+    "Mega Meganium ex": "Bayleef",
+    "Mega Starmie ex": "Staryu",
+    "Meganium": "Bayleef",
+    "Metang": "Beldum",
+    "Meowscarada ex": "Floragato",
+    "Steven's Metang": "Steven's Beldum",
+    "Milotic": "Feebas",
+    "Milotic ex": "Feebas",
+    "N's Darmanitan": "N's Darumaka",
+    "N's Klinklang": "N's Klang",
+    "Naclstack": "Nacli",
+    "N's Zoroark ex": "N's Zorua",
+    "N's Vanillish": "N's Vanillite",
+    "N's Vanilluxe": "N's Vanillish",
+    "Ninetales": "Vulpix",
+    "Noctowl": "Hoothoot",
+    "Noivern ex": "Noibat",
+    "Pawmot": "Pawmo",
+    "Palossand ex": "Sandygast",
+    "Piloswine": "Swinub",
+    "Pidgeotto": "Pidgey",
+    "Pidgeot ex": "Pidgeotto",
+    "Prinplup": "Piplup",
+    "Pupitar": "Larvitar",
+    "Raboot": "Scorbunny",
+    "Rabsca": "Rellor",
+    "Team Rocket's Pupitar": "Team Rocket's Larvitar",
+    "Rillaboom": "Thwackey",
+    "Revavroom": "Varoom",
+    "Scizor": "Scyther",
+    "Samurott": "Dewott",
+    "Seadra": "Horsea",
+    "Seaking": "Goldeen",
+    "Scovillain": "Capsakid",
+    "Scovillain ex": "Capsakid",
+    "Slowking": "Slowpoke",
+    "Slaking ex": "Vigoroth",
+    "Spewpa": "Scatterbug",
+    "Steenee": "Bounsweet",
+    "Steven's Metagross ex": "Steven's Metang",
+    "Sylveon ex": "Eevee",
+    "Team Rocket's Ampharos": "Team Rocket's Flaaffy",
+    "Team Rocket's Flaaffy": "Team Rocket's Mareep",
+    "Team Rocket's Golbat": "Team Rocket's Zubat",
+    "Team Rocket's Crobat ex": "Team Rocket's Golbat",
+    "Team Rocket's Honchkrow": "Team Rocket's Murkrow",
+    "Team Rocket's Orbeetle": "Team Rocket's Dottler",
+    "Team Rocket's Persian ex": "Team Rocket's Meowth",
+    "Team Rocket's Spidops": "Team Rocket's Tarountula",
+    "Team Rocket's Porygon2": "Team Rocket's Porygon",
+    "Team Rocket's Porygon-Z": "Team Rocket's Porygon2",
+    "Team Rocket's Tyranitar": "Team Rocket's Pupitar",
+    "Thwackey": "Grookey",
+    "Togekiss": "Togetic",
+    "Tirtouga": "Antique Cover Fossil",
+    "Toedscruel": "Toedscool",
+    "Tinkatuff": "Tinkatink",
+    "Tinkaton": "Tinkatuff",
+    "Tinkaton ex": "Tinkatuff",
+    "Toedscruel ex": "Toedscool",
+    "Togetic": "Togepi",
+    "Toxtricity": "Toxel",
+    "Tsareena ex": "Steenee",
+    "Tyranitar": "Pupitar",
+    "Vanillish": "Vanillite",
+    "Umbreon ex": "Eevee",
+    "Vileplume": "Gloom",
+    "Vibrava": "Trapinch",
+    "Vanilluxe": "Vanillish",
+    "Vigoroth": "Slakoth",
+    "Venusaur ex": "Ivysaur",
+    "Volcarona": "Larvesta",
+    "Vivillon": "Spewpa",
+    "Whiscash": "Barboach",
+    "Xatu": "Natu",
+    "Wugtrio": "Wiglett",
+    "Yanmega ex": "Yanma",
+    "Zoroark": "Zorua",
+    "Zweilous": "Deino"
+  },
+  "implies": {
+    "Abra": [
+      "Alakazam",
+      "Alakazam ex",
+      "Kadabra"
+    ],
+    "Aegislash": [
+      "Doublade",
+      "Honedge"
+    ],
+    "Aerodactyl": [
+      "Antique Old Amber"
+    ],
+    "Alakazam": [
+      "Abra",
+      "Alakazam ex",
+      "Kadabra"
+    ],
+    "Alakazam ex": [
+      "Abra",
+      "Alakazam",
+      "Kadabra"
+    ],
+    "Alolan Exeggutor ex": [
+      "Exeggcute",
+      "Exeggutor"
+    ],
+    "Antique Cover Fossil": [
+      "Tirtouga"
+    ],
+    "Antique Old Amber": [
+      "Aerodactyl"
+    ],
+    "Applin": [
+      "Dipplin",
+      "Hydrapple ex"
+    ],
+    "Arboliva ex": [
+      "Dolliv",
+      "Smoliv"
+    ],
+    "Archaludon": [
+      "Archaludon ex",
+      "Duraludon"
+    ],
+    "Archaludon ex": [
+      "Archaludon",
+      "Duraludon"
+    ],
+    "Arctibax": [
+      "Baxcalibur",
+      "Frigibax"
+    ],
+    "Armarouge": [
+      "Ceruledge",
+      "Ceruledge ex",
+      "Charcadet"
+    ],
+    "Azumarill": [
+      "Azumarill ex",
+      "Marill"
+    ],
+    "Azumarill ex": [
+      "Azumarill",
+      "Marill"
+    ],
+    "Banette ex": [
+      "Shuppet"
+    ],
+    "Barbaracle": [
+      "Binacle"
+    ],
+    "Barboach": [
+      "Whiscash"
+    ],
+    "Baxcalibur": [
+      "Arctibax",
+      "Frigibax"
+    ],
+    "Bayleef": [
+      "Chikorita",
+      "Mega Meganium ex",
+      "Meganium"
+    ],
+    "Beldum": [
+      "Metang"
+    ],
+    "Binacle": [
+      "Barbaracle"
+    ],
+    "Bisharp": [
+      "Kingambit",
+      "Pawniard"
+    ],
+    "Blaziken": [
+      "Blaziken ex",
+      "Combusken",
+      "Torchic"
+    ],
+    "Blaziken ex": [
+      "Blaziken",
+      "Combusken",
+      "Torchic"
+    ],
+    "Blissey ex": [
+      "Chansey"
+    ],
+    "Bounsweet": [
+      "Steenee",
+      "Tsareena ex"
+    ],
+    "Bronzong": [
+      "Bronzor"
+    ],
+    "Bronzor": [
+      "Bronzong"
+    ],
+    "Bulbasaur": [
+      "Ivysaur",
+      "Mega Venusaur ex",
+      "Venusaur ex"
+    ],
+    "Buneary": [
+      "Mega Lopunny ex"
+    ],
+    "Capsakid": [
+      "Scovillain",
+      "Scovillain ex"
+    ],
+    "Carvanha": [
+      "Mega Sharpedo ex"
+    ],
+    "Ceruledge": [
+      "Armarouge",
+      "Ceruledge ex",
+      "Charcadet"
+    ],
+    "Ceruledge ex": [
+      "Armarouge",
+      "Ceruledge",
+      "Charcadet"
+    ],
+    "Chandelure": [
+      "Lampent",
+      "Litwick"
+    ],
+    "Chansey": [
+      "Blissey ex"
+    ],
+    "Charcadet": [
+      "Armarouge",
+      "Ceruledge",
+      "Ceruledge ex"
+    ],
+    "Charizard ex": [
+      "Charmander",
+      "Charmeleon",
+      "Mega Charizard X ex",
+      "Mega Charizard Y ex"
+    ],
+    "Charmander": [
+      "Charizard ex",
+      "Charmeleon",
+      "Mega Charizard X ex",
+      "Mega Charizard Y ex"
+    ],
+    "Charmeleon": [
+      "Charizard ex",
+      "Charmander",
+      "Mega Charizard X ex",
+      "Mega Charizard Y ex"
+    ],
+    "Chikorita": [
+      "Bayleef",
+      "Mega Meganium ex",
+      "Meganium"
+    ],
+    "Cinderace": [
+      "Cinderace ex",
+      "Raboot",
+      "Scorbunny"
+    ],
+    "Cinderace ex": [
+      "Cinderace",
+      "Raboot",
+      "Scorbunny"
+    ],
+    "Combusken": [
+      "Blaziken",
+      "Blaziken ex",
+      "Torchic"
+    ],
+    "Conkeldurr": [
+      "Gurdurr",
+      "Timburr"
+    ],
+    "Croconaw": [
+      "Feraligatr",
+      "Mega Feraligatr ex",
+      "Totodile"
+    ],
+    "Crustle": [
+      "Dwebble"
+    ],
+    "Cynthia's Gabite": [
+      "Cynthia's Garchomp ex",
+      "Cynthia's Gible"
+    ],
+    "Cynthia's Garchomp ex": [
+      "Cynthia's Gabite",
+      "Cynthia's Gible"
+    ],
+    "Cynthia's Gible": [
+      "Cynthia's Gabite",
+      "Cynthia's Garchomp ex"
+    ],
+    "Cynthia's Roselia": [
+      "Cynthia's Roserade"
+    ],
+    "Cynthia's Roserade": [
+      "Cynthia's Roselia"
+    ],
+    "Dachsbun ex": [
+      "Fidough"
+    ],
+    "Dartrix": [
+      "Decidueye ex",
+      "Rowlet"
+    ],
+    "Decidueye ex": [
+      "Dartrix",
+      "Rowlet"
+    ],
+    "Deino": [
+      "Hydreigon ex",
+      "Zweilous"
+    ],
+    "Dewott": [
+      "Oshawott",
+      "Samurott"
+    ],
+    "Dipplin": [
+      "Applin",
+      "Hydrapple ex"
+    ],
+    "Dodrio": [
+      "Doduo"
+    ],
+    "Doduo": [
+      "Dodrio"
+    ],
+    "Dolliv": [
+      "Arboliva ex",
+      "Smoliv"
+    ],
+    "Doublade": [
+      "Aegislash",
+      "Honedge"
+    ],
+    "Dragapult ex": [
+      "Drakloak",
+      "Dreepy"
+    ],
+    "Dragonair": [
+      "Dratini",
+      "Mega Dragonite ex"
+    ],
+    "Drakloak": [
+      "Dragapult ex",
+      "Dreepy"
+    ],
+    "Dratini": [
+      "Dragonair",
+      "Mega Dragonite ex"
+    ],
+    "Dreepy": [
+      "Dragapult ex",
+      "Drakloak"
+    ],
+    "Drifblim": [
+      "Drifloon"
+    ],
+    "Drifloon": [
+      "Drifblim"
+    ],
+    "Drilbur": [
+      "Excadrill ex"
+    ],
+    "Dudunsparce": [
+      "Dudunsparce ex",
+      "Dunsparce"
+    ],
+    "Dudunsparce ex": [
+      "Dudunsparce",
+      "Dunsparce"
+    ],
+    "Dunsparce": [
+      "Dudunsparce",
+      "Dudunsparce ex"
+    ],
+    "Duraludon": [
+      "Archaludon",
+      "Archaludon ex"
+    ],
+    "Dusclops": [
+      "Dusknoir",
+      "Duskull"
+    ],
+    "Dusknoir": [
+      "Dusclops",
+      "Duskull"
+    ],
+    "Duskull": [
+      "Dusclops",
+      "Dusknoir"
+    ],
+    "Dwebble": [
+      "Crustle"
+    ],
+    "Eelektrik": [
+      "Mega Eelektross ex",
+      "Tynamo"
+    ],
+    "Eevee": [
+      "Espeon ex",
+      "Flareon ex",
+      "Glaceon ex",
+      "Leafeon ex",
+      "Sylveon ex",
+      "Umbreon ex"
+    ],
+    "Electrike": [
+      "Mega Manectric ex"
+    ],
+    "Empoleon ex": [
+      "Piplup",
+      "Prinplup"
+    ],
+    "Erika's Bellsprout": [
+      "Erika's Victreebel",
+      "Erika's Weepinbell"
+    ],
+    "Erika's Gloom": [
+      "Erika's Oddish",
+      "Erika's Vileplume ex"
+    ],
+    "Erika's Oddish": [
+      "Erika's Gloom",
+      "Erika's Vileplume ex"
+    ],
+    "Erika's Victreebel": [
+      "Erika's Bellsprout",
+      "Erika's Weepinbell"
+    ],
+    "Erika's Vileplume ex": [
+      "Erika's Gloom",
+      "Erika's Oddish"
+    ],
+    "Erika's Weepinbell": [
+      "Erika's Bellsprout",
+      "Erika's Victreebel"
+    ],
+    "Espathra ex": [
+      "Flittle"
+    ],
+    "Espeon ex": [
+      "Eevee",
+      "Flareon ex",
+      "Glaceon ex",
+      "Leafeon ex",
+      "Sylveon ex",
+      "Umbreon ex"
+    ],
+    "Ethan's Cyndaquil": [
+      "Ethan's Quilava",
+      "Ethan's Typhlosion"
+    ],
+    "Ethan's Magcargo": [
+      "Ethan's Slugma"
+    ],
+    "Ethan's Quilava": [
+      "Ethan's Cyndaquil",
+      "Ethan's Typhlosion"
+    ],
+    "Ethan's Slugma": [
+      "Ethan's Magcargo"
+    ],
+    "Ethan's Typhlosion": [
+      "Ethan's Cyndaquil",
+      "Ethan's Quilava"
+    ],
+    "Excadrill ex": [
+      "Drilbur"
+    ],
+    "Exeggcute": [
+      "Alolan Exeggutor ex",
+      "Exeggutor"
+    ],
+    "Exeggutor": [
+      "Alolan Exeggutor ex",
+      "Exeggcute"
+    ],
+    "Farigiraf ex": [
+      "Girafarig"
+    ],
+    "Feebas": [
+      "Milotic",
+      "Milotic ex"
+    ],
+    "Feraligatr": [
+      "Croconaw",
+      "Mega Feraligatr ex",
+      "Totodile"
+    ],
+    "Fidough": [
+      "Dachsbun ex"
+    ],
+    "Flareon ex": [
+      "Eevee",
+      "Espeon ex",
+      "Glaceon ex",
+      "Leafeon ex",
+      "Sylveon ex",
+      "Umbreon ex"
+    ],
+    "Flittle": [
+      "Espathra ex"
+    ],
+    "Floragato": [
+      "Meowscarada ex",
+      "Sprigatito"
+    ],
+    "Flygon ex": [
+      "Trapinch",
+      "Vibrava"
+    ],
+    "Forretress ex": [
+      "Pineco"
+    ],
+    "Frigibax": [
+      "Arctibax",
+      "Baxcalibur"
+    ],
+    "Frillish": [
+      "Jellicent ex"
+    ],
+    "Froakie": [
+      "Frogadier",
+      "Greninja ex"
+    ],
+    "Frogadier": [
+      "Froakie",
+      "Greninja ex"
+    ],
+    "Froslass": [
+      "Froslass ex",
+      "Glalie",
+      "Mega Froslass ex",
+      "Snorunt"
+    ],
+    "Froslass ex": [
+      "Froslass",
+      "Glalie",
+      "Mega Froslass ex",
+      "Snorunt"
+    ],
+    "Gabite": [
+      "Garchomp ex",
+      "Gible"
+    ],
+    "Galvantula": [
+      "Galvantula ex",
+      "Joltik"
+    ],
+    "Galvantula ex": [
+      "Galvantula",
+      "Joltik"
+    ],
+    "Garchomp ex": [
+      "Gabite",
+      "Gible"
+    ],
+    "Gardevoir ex": [
+      "Kirlia",
+      "Mega Gardevoir ex",
+      "Ralts"
+    ],
+    "Garganacl": [
+      "Nacli",
+      "Naclstack"
+    ],
+    "Gastly": [
+      "Haunter",
+      "Mega Gengar ex"
+    ],
+    "Gholdengo": [
+      "Gholdengo ex",
+      "Gimmighoul"
+    ],
+    "Gholdengo ex": [
+      "Gholdengo",
+      "Gimmighoul"
+    ],
+    "Gible": [
+      "Gabite",
+      "Garchomp ex"
+    ],
+    "Gimmighoul": [
+      "Gholdengo",
+      "Gholdengo ex"
+    ],
+    "Girafarig": [
+      "Farigiraf ex"
+    ],
+    "Glaceon ex": [
+      "Eevee",
+      "Espeon ex",
+      "Flareon ex",
+      "Leafeon ex",
+      "Sylveon ex",
+      "Umbreon ex"
+    ],
+    "Glalie": [
+      "Froslass",
+      "Froslass ex",
+      "Mega Froslass ex",
+      "Snorunt"
+    ],
+    "Gloom": [
+      "Oddish",
+      "Vileplume"
+    ],
+    "Goldeen": [
+      "Seaking"
+    ],
+    "Golduck": [
+      "Psyduck"
+    ],
+    "Greninja ex": [
+      "Froakie",
+      "Frogadier"
+    ],
+    "Grookey": [
+      "Rillaboom",
+      "Thwackey"
+    ],
+    "Gumshoos": [
+      "Yungoos"
+    ],
+    "Gurdurr": [
+      "Conkeldurr",
+      "Timburr"
+    ],
+    "Hariyama": [
+      "Makuhita"
+    ],
+    "Haunter": [
+      "Gastly",
+      "Mega Gengar ex"
+    ],
+    "Honedge": [
+      "Aegislash",
+      "Doublade"
+    ],
+    "Hoothoot": [
+      "Noctowl"
+    ],
+    "Hop's Dubwool": [
+      "Hop's Wooloo"
+    ],
+    "Hop's Phantump": [
+      "Hop's Trevenant"
+    ],
+    "Hop's Trevenant": [
+      "Hop's Phantump"
+    ],
+    "Hop's Wooloo": [
+      "Hop's Dubwool"
+    ],
+    "Horsea": [
+      "Kingdra ex",
+      "Seadra"
+    ],
+    "Hydrapple ex": [
+      "Applin",
+      "Dipplin"
+    ],
+    "Hydreigon ex": [
+      "Deino",
+      "Zweilous"
+    ],
+    "Iono's Bellibolt ex": [
+      "Iono's Tadbulb"
+    ],
+    "Iono's Kilowattrel": [
+      "Iono's Wattrel"
+    ],
+    "Iono's Tadbulb": [
+      "Iono's Bellibolt ex"
+    ],
+    "Iono's Wattrel": [
+      "Iono's Kilowattrel"
+    ],
+    "Ivysaur": [
+      "Bulbasaur",
+      "Mega Venusaur ex",
+      "Venusaur ex"
+    ],
+    "Jellicent ex": [
+      "Frillish"
+    ],
+    "Joltik": [
+      "Galvantula",
+      "Galvantula ex"
+    ],
+    "Kadabra": [
+      "Abra",
+      "Alakazam",
+      "Alakazam ex"
+    ],
+    "Kingambit": [
+      "Bisharp",
+      "Pawniard"
+    ],
+    "Kingdra ex": [
+      "Horsea",
+      "Seadra"
+    ],
+    "Kirlia": [
+      "Gardevoir ex",
+      "Mega Gardevoir ex",
+      "Ralts"
+    ],
+    "Lampent": [
+      "Chandelure",
+      "Litwick"
+    ],
+    "Larvesta": [
+      "Volcarona"
+    ],
+    "Larvitar": [
+      "Pupitar",
+      "Tyranitar"
+    ],
+    "Leafeon ex": [
+      "Eevee",
+      "Espeon ex",
+      "Flareon ex",
+      "Glaceon ex",
+      "Sylveon ex",
+      "Umbreon ex"
+    ],
+    "Liepard": [
+      "Purrloin"
+    ],
+    "Lilligant": [
+      "Petilil"
+    ],
+    "Litwick": [
+      "Chandelure",
+      "Lampent"
+    ],
+    "Lucario": [
+      "Mega Lucario ex",
+      "Riolu"
+    ],
+    "Lycanroc": [
+      "Rockruff"
+    ],
+    "Magnemite": [
+      "Magneton"
+    ],
+    "Magneton": [
+      "Magnemite"
+    ],
+    "Makuhita": [
+      "Hariyama"
+    ],
+    "Mamoswine": [
+      "Mamoswine ex",
+      "Piloswine",
+      "Swinub"
+    ],
+    "Mamoswine ex": [
+      "Mamoswine",
+      "Piloswine",
+      "Swinub"
+    ],
+    "Marill": [
+      "Azumarill",
+      "Azumarill ex"
+    ],
+    "Marnie's Grimmsnarl ex": [
+      "Marnie's Impidimp",
+      "Marnie's Morgrem"
+    ],
+    "Marnie's Impidimp": [
+      "Marnie's Grimmsnarl ex",
+      "Marnie's Morgrem"
+    ],
+    "Marnie's Morgrem": [
+      "Marnie's Grimmsnarl ex",
+      "Marnie's Impidimp"
+    ],
+    "Mega Abomasnow ex": [
+      "Snover"
+    ],
+    "Mega Charizard X ex": [
+      "Charizard ex",
+      "Charmander",
+      "Charmeleon",
+      "Mega Charizard Y ex"
+    ],
+    "Mega Charizard Y ex": [
+      "Charizard ex",
+      "Charmander",
+      "Charmeleon",
+      "Mega Charizard X ex"
+    ],
+    "Mega Dragonite ex": [
+      "Dragonair",
+      "Dratini"
+    ],
+    "Mega Eelektross ex": [
+      "Eelektrik",
+      "Tynamo"
+    ],
+    "Mega Feraligatr ex": [
+      "Croconaw",
+      "Feraligatr",
+      "Totodile"
+    ],
+    "Mega Froslass ex": [
+      "Froslass",
+      "Froslass ex",
+      "Glalie",
+      "Snorunt"
+    ],
+    "Mega Gardevoir ex": [
+      "Gardevoir ex",
+      "Kirlia",
+      "Ralts"
+    ],
+    "Mega Gengar ex": [
+      "Gastly",
+      "Haunter"
+    ],
+    "Mega Lopunny ex": [
+      "Buneary"
+    ],
+    "Mega Lucario ex": [
+      "Lucario",
+      "Riolu"
+    ],
+    "Mega Manectric ex": [
+      "Electrike"
+    ],
+    "Mega Meganium ex": [
+      "Bayleef",
+      "Chikorita",
+      "Meganium"
+    ],
+    "Mega Sharpedo ex": [
+      "Carvanha"
+    ],
+    "Mega Starmie ex": [
+      "Staryu"
+    ],
+    "Mega Venusaur ex": [
+      "Bulbasaur",
+      "Ivysaur",
+      "Venusaur ex"
+    ],
+    "Meganium": [
+      "Bayleef",
+      "Chikorita",
+      "Mega Meganium ex"
+    ],
+    "Meowscarada ex": [
+      "Floragato",
+      "Sprigatito"
+    ],
+    "Metang": [
+      "Beldum"
+    ],
+    "Milotic": [
+      "Feebas",
+      "Milotic ex"
+    ],
+    "Milotic ex": [
+      "Feebas",
+      "Milotic"
+    ],
+    "N's Darmanitan": [
+      "N's Darumaka"
+    ],
+    "N's Darumaka": [
+      "N's Darmanitan"
+    ],
+    "N's Vanillish": [
+      "N's Vanillite",
+      "N's Vanilluxe"
+    ],
+    "N's Vanillite": [
+      "N's Vanillish",
+      "N's Vanilluxe"
+    ],
+    "N's Vanilluxe": [
+      "N's Vanillish",
+      "N's Vanillite"
+    ],
+    "N's Zoroark ex": [
+      "N's Zorua"
+    ],
+    "N's Zorua": [
+      "N's Zoroark ex"
+    ],
+    "Nacli": [
+      "Garganacl",
+      "Naclstack"
+    ],
+    "Naclstack": [
+      "Garganacl",
+      "Nacli"
+    ],
+    "Natu": [
+      "Xatu"
+    ],
+    "Noctowl": [
+      "Hoothoot"
+    ],
+    "Noibat": [
+      "Noivern ex"
+    ],
+    "Noivern ex": [
+      "Noibat"
+    ],
+    "Oddish": [
+      "Gloom",
+      "Vileplume"
+    ],
+    "Oshawott": [
+      "Dewott",
+      "Samurott"
+    ],
+    "Palossand ex": [
+      "Sandygast"
+    ],
+    "Pawniard": [
+      "Bisharp",
+      "Kingambit"
+    ],
+    "Petilil": [
+      "Lilligant"
+    ],
+    "Pidgeot ex": [
+      "Pidgeotto",
+      "Pidgey"
+    ],
+    "Pidgeotto": [
+      "Pidgeot ex",
+      "Pidgey"
+    ],
+    "Pidgey": [
+      "Pidgeot ex",
+      "Pidgeotto"
+    ],
+    "Piloswine": [
+      "Mamoswine",
+      "Mamoswine ex",
+      "Swinub"
+    ],
+    "Pineco": [
+      "Forretress ex"
+    ],
+    "Piplup": [
+      "Empoleon ex",
+      "Prinplup"
+    ],
+    "Prinplup": [
+      "Empoleon ex",
+      "Piplup"
+    ],
+    "Psyduck": [
+      "Golduck"
+    ],
+    "Pupitar": [
+      "Larvitar",
+      "Tyranitar"
+    ],
+    "Purrloin": [
+      "Liepard"
+    ],
+    "Raboot": [
+      "Cinderace",
+      "Cinderace ex",
+      "Scorbunny"
+    ],
+    "Rabsca": [
+      "Rellor"
+    ],
+    "Ralts": [
+      "Gardevoir ex",
+      "Kirlia",
+      "Mega Gardevoir ex"
+    ],
+    "Rellor": [
+      "Rabsca"
+    ],
+    "Revavroom": [
+      "Varoom"
+    ],
+    "Rillaboom": [
+      "Grookey",
+      "Thwackey"
+    ],
+    "Riolu": [
+      "Lucario",
+      "Mega Lucario ex"
+    ],
+    "Rockruff": [
+      "Lycanroc"
+    ],
+    "Rowlet": [
+      "Dartrix",
+      "Decidueye ex"
+    ],
+    "Samurott": [
+      "Dewott",
+      "Oshawott"
+    ],
+    "Sandygast": [
+      "Palossand ex"
+    ],
+    "Scatterbug": [
+      "Spewpa",
+      "Vivillon"
+    ],
+    "Scizor": [
+      "Scyther"
+    ],
+    "Scorbunny": [
+      "Cinderace",
+      "Cinderace ex",
+      "Raboot"
+    ],
+    "Scovillain": [
+      "Capsakid",
+      "Scovillain ex"
+    ],
+    "Scovillain ex": [
+      "Capsakid",
+      "Scovillain"
+    ],
+    "Scyther": [
+      "Scizor"
+    ],
+    "Seadra": [
+      "Horsea",
+      "Kingdra ex"
+    ],
+    "Seaking": [
+      "Goldeen"
+    ],
+    "Shuppet": [
+      "Banette ex"
+    ],
+    "Slaking ex": [
+      "Slakoth",
+      "Vigoroth"
+    ],
+    "Slakoth": [
+      "Slaking ex",
+      "Vigoroth"
+    ],
+    "Slowking": [
+      "Slowpoke"
+    ],
+    "Slowpoke": [
+      "Slowking"
+    ],
+    "Smoliv": [
+      "Arboliva ex",
+      "Dolliv"
+    ],
+    "Snorunt": [
+      "Froslass",
+      "Froslass ex",
+      "Glalie",
+      "Mega Froslass ex"
+    ],
+    "Snover": [
+      "Mega Abomasnow ex"
+    ],
+    "Spewpa": [
+      "Scatterbug",
+      "Vivillon"
+    ],
+    "Sprigatito": [
+      "Floragato",
+      "Meowscarada ex"
+    ],
+    "Staryu": [
+      "Mega Starmie ex"
+    ],
+    "Steenee": [
+      "Bounsweet",
+      "Tsareena ex"
+    ],
+    "Steven's Beldum": [
+      "Steven's Metagross ex",
+      "Steven's Metang"
+    ],
+    "Steven's Metagross ex": [
+      "Steven's Beldum",
+      "Steven's Metang"
+    ],
+    "Steven's Metang": [
+      "Steven's Beldum",
+      "Steven's Metagross ex"
+    ],
+    "Swinub": [
+      "Mamoswine",
+      "Mamoswine ex",
+      "Piloswine"
+    ],
+    "Sylveon ex": [
+      "Eevee",
+      "Espeon ex",
+      "Flareon ex",
+      "Glaceon ex",
+      "Leafeon ex",
+      "Umbreon ex"
+    ],
+    "Team Rocket's Ampharos": [
+      "Team Rocket's Flaaffy",
+      "Team Rocket's Mareep"
+    ],
+    "Team Rocket's Crobat ex": [
+      "Team Rocket's Golbat",
+      "Team Rocket's Zubat"
+    ],
+    "Team Rocket's Flaaffy": [
+      "Team Rocket's Ampharos",
+      "Team Rocket's Mareep"
+    ],
+    "Team Rocket's Golbat": [
+      "Team Rocket's Crobat ex",
+      "Team Rocket's Zubat"
+    ],
+    "Team Rocket's Honchkrow": [
+      "Team Rocket's Murkrow"
+    ],
+    "Team Rocket's Larvitar": [
+      "Team Rocket's Pupitar",
+      "Team Rocket's Tyranitar"
+    ],
+    "Team Rocket's Mareep": [
+      "Team Rocket's Ampharos",
+      "Team Rocket's Flaaffy"
+    ],
+    "Team Rocket's Meowth": [
+      "Team Rocket's Persian ex"
+    ],
+    "Team Rocket's Murkrow": [
+      "Team Rocket's Honchkrow"
+    ],
+    "Team Rocket's Persian ex": [
+      "Team Rocket's Meowth"
+    ],
+    "Team Rocket's Porygon": [
+      "Team Rocket's Porygon-Z",
+      "Team Rocket's Porygon2"
+    ],
+    "Team Rocket's Porygon-Z": [
+      "Team Rocket's Porygon",
+      "Team Rocket's Porygon2"
+    ],
+    "Team Rocket's Porygon2": [
+      "Team Rocket's Porygon",
+      "Team Rocket's Porygon-Z"
+    ],
+    "Team Rocket's Pupitar": [
+      "Team Rocket's Larvitar",
+      "Team Rocket's Tyranitar"
+    ],
+    "Team Rocket's Spidops": [
+      "Team Rocket's Tarountula"
+    ],
+    "Team Rocket's Tarountula": [
+      "Team Rocket's Spidops"
+    ],
+    "Team Rocket's Tyranitar": [
+      "Team Rocket's Larvitar",
+      "Team Rocket's Pupitar"
+    ],
+    "Team Rocket's Zubat": [
+      "Team Rocket's Crobat ex",
+      "Team Rocket's Golbat"
+    ],
+    "Thwackey": [
+      "Grookey",
+      "Rillaboom"
+    ],
+    "Timburr": [
+      "Conkeldurr",
+      "Gurdurr"
+    ],
+    "Tinkatink": [
+      "Tinkaton",
+      "Tinkaton ex",
+      "Tinkatuff"
+    ],
+    "Tinkaton": [
+      "Tinkatink",
+      "Tinkaton ex",
+      "Tinkatuff"
+    ],
+    "Tinkaton ex": [
+      "Tinkatink",
+      "Tinkaton",
+      "Tinkatuff"
+    ],
+    "Tinkatuff": [
+      "Tinkatink",
+      "Tinkaton",
+      "Tinkaton ex"
+    ],
+    "Tirtouga": [
+      "Antique Cover Fossil"
+    ],
+    "Toedscool": [
+      "Toedscruel",
+      "Toedscruel ex"
+    ],
+    "Toedscruel": [
+      "Toedscool",
+      "Toedscruel ex"
+    ],
+    "Toedscruel ex": [
+      "Toedscool",
+      "Toedscruel"
+    ],
+    "Togekiss": [
+      "Togepi",
+      "Togetic"
+    ],
+    "Togepi": [
+      "Togekiss",
+      "Togetic"
+    ],
+    "Togetic": [
+      "Togekiss",
+      "Togepi"
+    ],
+    "Torchic": [
+      "Blaziken",
+      "Blaziken ex",
+      "Combusken"
+    ],
+    "Totodile": [
+      "Croconaw",
+      "Feraligatr",
+      "Mega Feraligatr ex"
+    ],
+    "Toxel": [
+      "Toxtricity"
+    ],
+    "Toxtricity": [
+      "Toxel"
+    ],
+    "Trapinch": [
+      "Flygon ex",
+      "Vibrava"
+    ],
+    "Tsareena ex": [
+      "Bounsweet",
+      "Steenee"
+    ],
+    "Tynamo": [
+      "Eelektrik",
+      "Mega Eelektross ex"
+    ],
+    "Tyranitar": [
+      "Larvitar",
+      "Pupitar"
+    ],
+    "Umbreon ex": [
+      "Eevee",
+      "Espeon ex",
+      "Flareon ex",
+      "Glaceon ex",
+      "Leafeon ex",
+      "Sylveon ex"
+    ],
+    "Vanillish": [
+      "Vanillite",
+      "Vanilluxe"
+    ],
+    "Vanillite": [
+      "Vanillish",
+      "Vanilluxe"
+    ],
+    "Vanilluxe": [
+      "Vanillish",
+      "Vanillite"
+    ],
+    "Varoom": [
+      "Revavroom"
+    ],
+    "Venusaur ex": [
+      "Bulbasaur",
+      "Ivysaur",
+      "Mega Venusaur ex"
+    ],
+    "Vibrava": [
+      "Flygon ex",
+      "Trapinch"
+    ],
+    "Vigoroth": [
+      "Slaking ex",
+      "Slakoth"
+    ],
+    "Vileplume": [
+      "Gloom",
+      "Oddish"
+    ],
+    "Vivillon": [
+      "Scatterbug",
+      "Spewpa"
+    ],
+    "Volcarona": [
+      "Larvesta"
+    ],
+    "Whiscash": [
+      "Barboach"
+    ],
+    "Wiglett": [
+      "Wugtrio"
+    ],
+    "Wugtrio": [
+      "Wiglett"
+    ],
+    "Xatu": [
+      "Natu"
+    ],
+    "Yanma": [
+      "Yanmega ex"
+    ],
+    "Yanmega ex": [
+      "Yanma"
+    ],
+    "Yungoos": [
+      "Gumshoos"
+    ],
+    "Zoroark": [
+      "Zorua"
+    ],
+    "Zorua": [
+      "Zoroark"
+    ],
+    "Zweilous": [
+      "Deino",
+      "Hydreigon ex"
+    ]
+  }
+}

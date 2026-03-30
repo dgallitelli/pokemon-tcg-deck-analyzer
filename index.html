@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pokémon TCG — Core Card Packages</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Chakra Petch', system-ui, sans-serif;
+    background: #0f0f1a;
+    color: #e0e0e0;
+    overflow: hidden;
+    height: 100vh;
+  }
+  .loading-overlay {
+    position: fixed; inset: 0; z-index: 10000;
+    background: #0f0f1a;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+  .loading-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+  .loading-spinner {
+    width: 40px; height: 40px;
+    border: 3px solid rgba(78,205,196,0.15);
+    border-top-color: #4ECDC4;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  .loading-text {
+    margin-top: 16px; font-size: 13px; color: #666;
+    letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 24px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .header h1 {
+    font-size: 20px; font-weight: 700; letter-spacing: 0.5px;
+    background: linear-gradient(90deg, #4ECDC4, #A78BFA);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .header .stats { font-size: 13px; color: #888; }
+  .header .stats span { color: #4ECDC4; font-weight: 600; }
+
+  /* Tabs */
+  .tab-bar {
+    display: flex; gap: 0; background: #12121f;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 0 24px;
+  }
+  .tab {
+    padding: 8px 18px; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.5px; text-transform: uppercase;
+    color: #666; cursor: pointer; border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    font-family: 'Chakra Petch', sans-serif;
+  }
+  .tab:hover { color: #aaa; }
+  .tab.active { color: #4ECDC4; border-bottom-color: #4ECDC4; }
+
+  .layout { display: flex; height: calc(100vh - 85px); }
+  .canvas-wrap { flex: 1; position: relative; overflow: hidden; cursor: grab; }
+  .canvas-wrap:active { cursor: grabbing; }
+  #scatter { width: 100%; height: 100%; display: block; }
+
+  @media (max-width: 860px) {
+    .header { flex-direction: column; gap: 4px; padding: 10px 16px; }
+    .header h1 { font-size: 16px; }
+    .tab-bar { padding: 0 8px; overflow-x: auto; }
+    .tab { padding: 8px 12px; font-size: 11px; white-space: nowrap; }
+    .layout { flex-direction: column; height: calc(100vh - 105px); }
+    body { overflow: auto; height: auto; }
+    .canvas-wrap { min-height: 50vh; }
+    .sidebar {
+      width: 100% !important; min-width: 0 !important;
+      border-left: none !important;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      max-height: 45vh; overflow-y: auto;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="loading-overlay" id="loading">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Loading card data</div>
+</div>
+<div class="header">
+  <h1>Pokémon TCG — Core Card Packages</h1>
+  <div class="stats">
+    <span id="stat-cards">0</span> cards ·
+    <span id="stat-clusters">0</span> packages ·
+    <span id="stat-decks">0</span> decks analyzed
+  </div>
+</div>
+
+<div class="tab-bar" id="tab-bar"></div>
+
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('open')">
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<div class="layout">
+  <div class="canvas-wrap">
+    <canvas id="scatter"></canvas>
+    <div id="tooltip" class="tooltip"></div>
+  </div>
+  <div class="sidebar" id="sidebar">
+    <div class="search-wrap">
+      <label for="search-input" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Search cards</label>
+      <input type="text" id="search-input" placeholder="Search cards..." autocomplete="off" spellcheck="false" />
+      <div id="search-results" class="search-results"></div>
+    </div>
+
+    <div class="panel" id="panel-default">
+      <div class="panel-title">How to use</div>
+      <p class="hint">Cards positioned by the selected metric. Dot size = meta share, color = co-occurrence cluster. Hover for stats, click to select a package. Scroll to zoom, drag to pan.</p>
+      <div class="panel-title" style="margin-top:16px">Packages</div>
+      <div id="legend"></div>
+    </div>
+    <div class="panel" id="panel-cluster" style="display:none">
+      <div class="panel-header">
+        <div class="panel-title" id="cluster-title">Cluster</div>
+        <button class="btn-close" id="btn-deselect" aria-label="Close cluster panel">✕</button>
+      </div>
+      <div class="card-count" id="cluster-card-count"></div>
+      <div class="section-label">Cards in package</div>
+      <div id="cluster-cards" class="card-list"></div>
+      <div class="section-label" style="margin-top:16px">
+        Next best cards <span class="section-sub">ranked by avg PMI</span>
+      </div>
+      <div id="cluster-recs" class="rec-list"></div>
+    </div>
+    <div class="panel" id="panel-card" style="display:none">
+      <div class="panel-header">
+        <div class="panel-title" id="card-title">Card</div>
+        <button class="btn-close" id="btn-back" aria-label="Back to cluster">←</button>
+      </div>
+      <div id="card-details"></div>
+      <div class="section-label" style="margin-top:16px">
+        PMI connections <span class="section-sub">strongest co-occurrences</span>
+      </div>
+      <div id="card-pmi-list" class="rec-list"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .tooltip {
+    display: none; position: absolute; pointer-events: none;
+    background: rgba(22,33,62,0.95); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px; padding: 10px 14px; font-size: 13px; line-height: 1.5;
+    max-width: 280px; backdrop-filter: blur(8px); z-index: 100;
+  }
+  .tooltip .tt-card { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+  .tooltip .tt-dim { color: #888; }
+  .sidebar {
+    width: 340px; min-width: 340px; background: #12121f;
+    border-left: 1px solid rgba(255,255,255,0.06); overflow-y: auto; padding: 16px;
+  }
+  .panel-title { font-family: 'Chakra Petch', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 8px; letter-spacing: 0.3px; }
+  .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .btn-close {
+    background: rgba(255,255,255,0.08); border: none; color: #aaa;
+    font-size: 14px; width: 28px; height: 28px; border-radius: 6px; cursor: pointer;
+  }
+  .btn-close:hover { background: rgba(255,255,255,0.15); color: #fff; }
+  .hint { font-size: 13px; color: #777; line-height: 1.6; }
+  .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: #666; margin-bottom: 8px; }
+  .section-sub { text-transform: none; letter-spacing: 0; font-style: italic; margin-left: 4px; }
+  .card-count { font-size: 13px; color: #888; margin-bottom: 12px; }
+  .card-list, .rec-list { display: flex; flex-direction: column; gap: 4px; }
+  .card-item, .rec-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 10px; border-radius: 6px; background: rgba(255,255,255,0.03);
+    font-size: 13px; cursor: pointer; transition: background 0.15s;
+  }
+  .card-item:hover, .rec-item:hover { background: rgba(255,255,255,0.08); }
+  .card-item .dot { width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; flex-shrink: 0; }
+  .card-item .name, .rec-item .name { flex: 1; }
+  .card-item .badge, .rec-item .badge {
+    font-size: 11px; padding: 2px 7px; border-radius: 4px;
+    background: rgba(255,255,255,0.06); color: #aaa; margin-left: 6px;
+  }
+  .rec-item .rank { width: 22px; text-align: center; font-weight: 600; color: #4ECDC4; margin-right: 8px; font-size: 12px; }
+  .rec-item .score { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A78BFA; }
+  #legend { display: flex; flex-direction: column; gap: 4px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; padding: 4px 0; cursor: pointer; }
+  .legend-item:hover { color: #fff; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); flex-shrink: 0; }
+  .card-img-pair { display: flex; gap: 8px; margin: 8px 0 12px; justify-content: center; }
+  .card-img-col { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .card-img-label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+  .card-img { max-width: 145px; width: 100%; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); transition: transform 0.2s; cursor: zoom-in; }
+  .card-img:hover { transform: scale(1.05); }
+  .lightbox { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); justify-content: center; align-items: center; cursor: zoom-out; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 14px; box-shadow: 0 8px 40px rgba(0,0,0,0.6); }
+  .search-wrap { position: relative; margin-bottom: 14px; }
+  #search-input {
+    width: 100%; padding: 9px 12px; border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04);
+    color: #e0e0e0; font-size: 13px; font-family: inherit; outline: none;
+    transition: border-color 0.2s;
+  }
+  #search-input:focus { border-color: #4ECDC4; background: rgba(255,255,255,0.06); }
+  #search-input::placeholder { color: #555; }
+  .search-results {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    background: #1a1a2e; border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 0 0 8px 8px; max-height: 260px; overflow-y: auto; z-index: 200;
+  }
+  .search-results.open { display: block; }
+  .sr-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 13px; cursor: pointer; transition: background 0.1s; }
+  .sr-item:hover, .sr-item.active { background: rgba(255,255,255,0.08); }
+  .sr-item .sr-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .sr-item .sr-meta { color: #666; font-size: 11px; margin-left: auto; white-space: nowrap; }
+</style>
+
+<script>
+const COLORS = [
+  '#FF6B6B','#4ECDC4','#A78BFA','#F59E0B','#10B981',
+  '#3B82F6','#EC4899','#8B5CF6','#6366F1','#F97316',
+  '#14B8A6','#F43F5E','#84CC16','#06B6D4','#D946EF',
+];
+const NOISE_COLOR = '#555';
+const MARGIN = { top: 40, right: 20, bottom: 40, left: 20 };
+
+let DATA = null;
+let canvas, ctx;
+let hoveredIdx = -1;
+let selectedCluster = null;
+let activeView = 'pmi';
+let dpr = window.devicePixelRatio || 1;
+let view = { xMin: -1.1, xMax: 1.1, yMin: -1.1, yMax: 1.1 };
+let drag = { active: false, sx: 0, sy: 0, vx: 0, vy: 0, vxMin: 0, vyMin: 0 };
+
+function px(p) { return p.views[activeView].x; }
+function py(p) { return p.views[activeView].y; }
+function viewMeta() { return DATA.views[activeView]; }
+
+function clusterColor(cid) {
+  if (cid === -1) return NOISE_COLOR;
+  const keys = Object.keys(DATA.clusters).filter(k => k !== '-1').sort((a,b) => a - b);
+  return COLORS[keys.indexOf(String(cid)) % COLORS.length];
+}
+
+function plotArea() {
+  const w = canvas.width / dpr, h = canvas.height / dpr;
+  return { x: MARGIN.left, y: MARGIN.top, w: w - MARGIN.left - MARGIN.right, h: h - MARGIN.top - MARGIN.bottom };
+}
+
+function dataToScreen(dx, dy) {
+  const a = plotArea();
+  return {
+    x: a.x + (dx - view.xMin) / (view.xMax - view.xMin) * a.w,
+    y: a.y + a.h - (dy - view.yMin) / (view.yMax - view.yMin) * a.h,
+  };
+}
+
+function screenToData(sx, sy) {
+  const a = plotArea();
+  return {
+    x: view.xMin + (sx - a.x) / a.w * (view.xMax - view.xMin),
+    y: view.yMin + (a.h - (sy - a.y)) / a.h * (view.yMax - view.yMin),
+  };
+}
+
+function pointRadius(p) {
+  return Math.max(4, Math.min(20, Math.sqrt(p.meta_share) * 3.5 + 3));
+}
+</script>
+
+<script>
+function drawAxes() {
+  const a = plotArea();
+  const d = dpr;
+  const vm = viewMeta();
+
+  ctx.fillStyle = '#0f0f1a';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#13131f';
+  ctx.fillRect(a.x * d, a.y * d, a.w * d, a.h * d);
+
+  // Origin crosshair at (0,0) if in view
+  const origin = dataToScreen(0, 0);
+  if (origin.x > a.x && origin.x < a.x + a.w && origin.y > a.y && origin.y < a.y + a.h) {
+    ctx.setLineDash([6 * d, 4 * d]);
+    ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+    ctx.lineWidth = 1 * d;
+    ctx.beginPath();
+    ctx.moveTo(origin.x * d, a.y * d);
+    ctx.lineTo(origin.x * d, (a.y + a.h) * d);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(a.x * d, origin.y * d);
+    ctx.lineTo((a.x + a.w) * d, origin.y * d);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // Quadrant labels
+  if (vm.quadrants && origin.x > a.x && origin.x < a.x + a.w) {
+    ctx.font = `600 ${11 * d}px 'Chakra Petch', system-ui`;
+    ctx.globalAlpha = 0.18;
+    const q = vm.quadrants;
+    const ox = origin.x * d, oy = origin.y * d;
+    const ax = a.x * d, ay = a.y * d, aw = a.w * d, ah = a.h * d;
+
+    ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+    ctx.fillStyle = '#10B981';
+    ctx.fillText(q.tr.toUpperCase(), ox + 10 * d, ay + 8 * d);
+
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#A78BFA';
+    ctx.fillText(q.tl.toUpperCase(), ox - 10 * d, ay + 8 * d);
+
+    ctx.textBaseline = 'bottom';
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#F59E0B';
+    ctx.fillText(q.br.toUpperCase(), ox + 10 * d, ay + ah - 8 * d);
+
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#555';
+    ctx.fillText(q.bl.toUpperCase(), ox - 10 * d, ay + ah - 8 * d);
+    ctx.globalAlpha = 1;
+  }
+
+  // Axis labels
+  ctx.fillStyle = '#555';
+  ctx.font = `600 ${11 * d}px 'Chakra Petch', system-ui`;
+  ctx.globalAlpha = 0.6;
+  ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
+  ctx.fillText(vm.x_label, (a.x + a.w / 2) * d, (a.y - 6) * d);
+  ctx.save();
+  ctx.translate((a.x + a.w + 14) * d, (a.y + a.h / 2) * d);
+  ctx.rotate(Math.PI / 2);
+  ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
+  ctx.fillText(vm.y_label, 0, 0);
+  ctx.restore();
+  ctx.globalAlpha = 1;
+
+  // Border
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  ctx.lineWidth = 1 * d;
+  ctx.strokeRect(a.x * d, a.y * d, a.w * d, a.h * d);
+}
+</script>
+
+<script>
+function draw() {
+  if (!canvas) return;
+  const d = dpr, a = plotArea();
+  drawAxes();
+  if (!DATA) return;
+  const pts = DATA.points;
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(a.x * d, a.y * d, a.w * d, a.h * d);
+  ctx.clip();
+
+  // Cluster edges
+  if (selectedCluster !== null) {
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+    ctx.lineWidth = 1 * d;
+    const members = pts.filter(p => p.cluster === selectedCluster);
+    for (let i = 0; i < members.length; i++) {
+      for (let j = i + 1; j < members.length; j++) {
+        const sa = dataToScreen(px(members[i]), py(members[i]));
+        const sb = dataToScreen(px(members[j]), py(members[j]));
+        ctx.beginPath();
+        ctx.moveTo(sa.x * d, sa.y * d);
+        ctx.lineTo(sb.x * d, sb.y * d);
+        ctx.stroke();
+      }
+    }
+  }
+
+  for (let i = 0; i < pts.length; i++) {
+    const p = pts[i];
+    const s = dataToScreen(px(p), py(p));
+    const r = pointRadius(p);
+    const isSelected = selectedCluster !== null && p.cluster === selectedCluster;
+    const isDimmed = selectedCluster !== null && p.cluster !== selectedCluster;
+    const isHovered = i === hoveredIdx;
+
+    ctx.globalAlpha = isDimmed ? 0.12 : 1;
+    if (isHovered) { ctx.shadowColor = clusterColor(p.cluster); ctx.shadowBlur = 18 * d; }
+
+    ctx.beginPath();
+    ctx.arc(s.x * d, s.y * d, r * d, 0, Math.PI * 2);
+    ctx.fillStyle = clusterColor(p.cluster);
+    ctx.fill();
+    ctx.strokeStyle = isSelected ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.15)';
+    ctx.lineWidth = (isHovered ? 2.5 : 1) * d;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    const zoomLevel = a.w / (view.xMax - view.xMin);
+    const showLabel = isHovered || (isSelected && zoomLevel > 8) || (zoomLevel > 15 && !isDimmed);
+    if (showLabel) {
+      ctx.fillStyle = isDimmed ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.9)';
+      ctx.font = `${(isHovered ? 11 : 9.5) * d}px system-ui`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
+      ctx.fillText(p.card, s.x * d, (s.y - r - 3) * d);
+    }
+    ctx.globalAlpha = 1;
+  }
+  ctx.restore();
+}
+</script>
+
+<script>
+function hitTest(mx, my) {
+  if (!DATA) return -1;
+  let best = -1, bestDist = Infinity;
+  for (let i = 0; i < DATA.points.length; i++) {
+    const p = DATA.points[i];
+    const s = dataToScreen(px(p), py(p));
+    const dx = mx - s.x, dy = my - s.y;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if (dist < pointRadius(p) * 1.5 && dist < bestDist) { best = i; bestDist = dist; }
+  }
+  return best;
+}
+
+function showTooltip(idx, mx, my) {
+  const tip = document.getElementById('tooltip');
+  if (idx < 0) { tip.style.display = 'none'; return; }
+  const p = DATA.points[idx];
+  const cl = DATA.clusters[p.cluster];
+  tip.innerHTML = `
+    <div class="tt-card" style="color:${clusterColor(p.cluster)}">${p.card}</div>
+    <div class="tt-dim">${cl ? cl.label : 'Unclustered'}</div>
+    <div>Meta: <b>${p.meta_share.toFixed(1)}%</b> · WR: <b>${p.win_rate.toFixed(1)}%</b> · ${p.archetype_count} archetypes</div>
+    <div>In <b>${p.appearances}</b> decks (dot size = meta share)</div>
+    <div class="tt-dim" style="margin-top:4px">Click to select package</div>
+  `;
+  const rect = canvas.getBoundingClientRect();
+  let tx = mx + 16, ty = my - 10;
+  if (tx + 280 > rect.width) tx = mx - 290;
+  if (ty + 130 > rect.height) ty = my - 130;
+  tip.style.left = tx + 'px'; tip.style.top = ty + 'px'; tip.style.display = 'block';
+}
+
+function showClusterPanel(cid) {
+  selectedCluster = cid;
+  const cl = DATA.clusters[cid];
+  if (!cl) return;
+  document.getElementById('panel-default').style.display = 'none';
+  document.getElementById('panel-card').style.display = 'none';
+  document.getElementById('panel-cluster').style.display = 'block';
+  document.getElementById('cluster-title').textContent = cl.label;
+  document.getElementById('cluster-title').style.color = clusterColor(cid);
+  document.getElementById('cluster-card-count').textContent =
+    `${cl.cards.length} cards · ${cl.avg_meta_share}% avg meta · ${cl.avg_win_rate}% avg WR`;
+
+  const cardList = document.getElementById('cluster-cards');
+  cardList.innerHTML = '';
+  cl.cards.forEach(name => {
+    const pt = DATA.points.find(p => p.card === name);
+    const el = document.createElement('div');
+    el.className = 'card-item';
+    el.innerHTML = `
+      <span class="dot" style="background:${clusterColor(cid)}"></span>
+      <span class="name">${name}</span>
+      <span class="badge">${pt ? pt.win_rate.toFixed(0) : '?'}% WR</span>
+      <span class="badge">${pt ? pt.appearances : 0} decks</span>
+    `;
+    el.onclick = () => showCardPanel(name);
+    cardList.appendChild(el);
+  });
+
+  const recList = document.getElementById('cluster-recs');
+  recList.innerHTML = '';
+  cl.recommendations.forEach((r, i) => {
+    const el = document.createElement('div');
+    el.className = 'rec-item';
+    el.innerHTML = `
+      <span class="rank">${i + 1}</span>
+      <span class="name">${r.card}</span>
+      <span class="score">${r.score.toFixed(2)}</span>
+      <span class="badge">${r.cooccurs} links</span>
+    `;
+    el.onclick = () => showCardPanel(r.card);
+    recList.appendChild(el);
+  });
+  draw();
+}
+</script>
+
+<script>
+function showCardPanel(cardName) {
+  document.getElementById('panel-default').style.display = 'none';
+  document.getElementById('panel-cluster').style.display = 'none';
+  document.getElementById('panel-card').style.display = 'block';
+  const pt = DATA.points.find(p => p.card === cardName);
+  document.getElementById('card-title').textContent = cardName;
+  document.getElementById('card-title').style.color = pt ? clusterColor(pt.cluster) : '#fff';
+  const cl = pt ? DATA.clusters[pt.cluster] : null;
+
+  let imgHtml = '';
+  if (pt && pt.img) {
+    const lgSrc = pt.img_lg || pt.img;
+    imgHtml = `<div class="card-img-pair">
+      <div class="card-img-col">
+        <img src="${pt.img}" alt="${cardName} (EN)" class="card-img"
+             onclick="openLightbox('${lgSrc}')"
+             onerror="fallbackCardImage(this, '${cardName.replace(/'/g, "\\'")}')" />
+        <span class="card-img-label">EN</span>
+      </div>
+      <div class="card-img-col" id="ja-img-col" style="display:none">
+        <img id="ja-card-img" alt="${cardName} (JA)" class="card-img" />
+        <span class="card-img-label">JA</span>
+      </div>
+    </div>`;
+  }
+
+  document.getElementById('card-details').innerHTML = `
+    ${imgHtml}
+    <div style="font-size:13px;color:#888;margin-bottom:8px">
+      ${cl ? cl.label : 'Unclustered'} ·
+      Meta: ${pt ? pt.meta_share.toFixed(1) : '?'}% ·
+      WR: ${pt ? pt.win_rate.toFixed(1) : '?'}% ·
+      ${pt ? pt.appearances : '?'} decks
+    </div>
+  `;
+
+  if (pt && pt.img) loadJapaneseImage(cardName);
+
+  const pairs = [];
+  for (const [key, score] of Object.entries(DATA.pmi_pairs)) {
+    const [a, b] = key.split('||');
+    if (a === cardName) pairs.push({ card: b, score });
+    else if (b === cardName) pairs.push({ card: a, score });
+  }
+  pairs.sort((a, b) => b.score - a.score);
+  const pmiList = document.getElementById('card-pmi-list');
+  pmiList.innerHTML = '';
+  pairs.slice(0, 12).forEach((p, i) => {
+    const other = DATA.points.find(pt => pt.card === p.card);
+    const el = document.createElement('div');
+    el.className = 'rec-item';
+    el.innerHTML = `
+      <span class="rank" style="color:${other ? clusterColor(other.cluster) : '#888'}">${i + 1}</span>
+      <span class="name">${p.card}</span>
+      <span class="score">${p.score.toFixed(2)}</span>
+    `;
+    el.onclick = () => showCardPanel(p.card);
+    pmiList.appendChild(el);
+  });
+  if (pairs.length === 0) pmiList.innerHTML = '<div style="color:#666;font-size:13px">No co-occurrence data</div>';
+}
+
+function deselectCluster() {
+  selectedCluster = null;
+  document.getElementById('panel-default').style.display = 'block';
+  document.getElementById('panel-cluster').style.display = 'none';
+  document.getElementById('panel-card').style.display = 'none';
+  draw();
+}
+
+function buildLegend() {
+  const el = document.getElementById('legend');
+  el.innerHTML = '';
+  const entries = Object.entries(DATA.clusters).sort((a, b) => b[1].avg_meta_share - a[1].avg_meta_share);
+  for (const [cid, cl] of entries) {
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = `
+      <span class="legend-dot" style="background:${clusterColor(Number(cid))}"></span>
+      <span>${cl.label} (${cl.cards.length})</span>
+    `;
+    item.onclick = () => showClusterPanel(Number(cid));
+    el.appendChild(item);
+  }
+}
+</script>
+
+<script>
+function fitView() {
+  if (!DATA || DATA.points.length === 0) return;
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+  for (const p of DATA.points) {
+    const x = px(p), y = py(p);
+    if (x < minX) minX = x; if (x > maxX) maxX = x;
+    if (y < minY) minY = y; if (y > maxY) maxY = y;
+  }
+  const padX = (maxX - minX) * 0.08 || 0.5;
+  const padY = (maxY - minY) * 0.08 || 0.5;
+  view.xMin = minX - padX; view.xMax = maxX + padX;
+  view.yMin = minY - padY; view.yMax = maxY + padY;
+}
+
+function switchView(viewId) {
+  activeView = viewId;
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.view === viewId));
+  fitView();
+  draw();
+}
+
+function buildTabs() {
+  const bar = document.getElementById('tab-bar');
+  bar.innerHTML = '';
+  for (const [id, meta] of Object.entries(DATA.views)) {
+    const tab = document.createElement('div');
+    tab.className = 'tab' + (id === activeView ? ' active' : '');
+    tab.dataset.view = id;
+    tab.textContent = meta.label;
+    tab.onclick = () => switchView(id);
+    bar.appendChild(tab);
+  }
+}
+
+function resize() {
+  const wrap = canvas.parentElement;
+  dpr = window.devicePixelRatio || 1;
+  canvas.width = wrap.clientWidth * dpr;
+  canvas.height = wrap.clientHeight * dpr;
+  canvas.style.width = wrap.clientWidth + 'px';
+  canvas.style.height = wrap.clientHeight + 'px';
+  draw();
+}
+
+const _imgCache = {};
+
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+
+const _jaCache = {};
+async function loadJapaneseImage(cardName) {
+  const col = document.getElementById('ja-img-col');
+  const img = document.getElementById('ja-card-img');
+  if (!col || !img) return;
+  if (_jaCache[cardName] === false) return;
+  if (_jaCache[cardName]) {
+    img.src = _jaCache[cardName]; img.onclick = () => openLightbox(_jaCache[cardName]);
+    col.style.display = ''; return;
+  }
+  try {
+    const q = encodeURIComponent(cardName);
+    const enResp = await fetch(`https://api.tcgdex.net/v2/en/cards?name=${q}`);
+    const enCards = await enResp.json();
+    const match = enCards.find(c => c.name === cardName);
+    if (!match) { _jaCache[cardName] = false; return; }
+    const detResp = await fetch(`https://api.tcgdex.net/v2/en/cards/${match.id}`);
+    const detail = await detResp.json();
+    const dexIds = detail.dexId;
+    const suffixMatch = cardName.match(/\s+(ex|V|VMAX|VSTAR|GX|EX)$/i);
+    const suffix = suffixMatch ? suffixMatch[1] : '';
+    let jaUrl = null;
+    if (dexIds && dexIds.length > 0) {
+      const jaResp = await fetch(`https://api.tcgdex.net/v2/ja/cards?dexId=${dexIds[0]}`);
+      const jaCards = await jaResp.json();
+      let baseJaName = null;
+      for (const jc of jaCards) {
+        const stripped = jc.name.replace(/（.*?）/g, '').replace(/(ex|V|VMAX|VSTAR|GX|スター)/gi, '').trim();
+        if (/[\u30A0-\u30FF]/.test(stripped)) { baseJaName = stripped; break; }
+      }
+      if (baseJaName && suffix) {
+        const jaNameResp = await fetch(`https://api.tcgdex.net/v2/ja/cards?name=${encodeURIComponent(baseJaName + suffix)}`);
+        const jaNameCards = await jaNameResp.json();
+        const withImg = jaNameCards.filter(c => c.image);
+        if (withImg.length > 0) jaUrl = withImg[withImg.length - 1].image + '/high.webp';
+      } else if (!suffix) {
+        const withImg = jaCards.filter(c => c.image && !c.name.match(/(ex|V|VMAX|VSTAR|GX|スター)/i));
+        if (withImg.length > 0) jaUrl = withImg[withImg.length - 1].image + '/high.webp';
+      }
+    }
+    if (!jaUrl) {
+      const setId = (detail.set?.id || '').toUpperCase();
+      const localId = detail.localId || '';
+      if (setId && localId) {
+        const jaResp = await fetch(`https://api.tcgdex.net/v2/ja/cards/${setId}-${localId}`);
+        if (jaResp.ok) { const jaCard = await jaResp.json(); if (jaCard?.image) jaUrl = jaCard.image + '/high.webp'; }
+      }
+    }
+    if (jaUrl) {
+      _jaCache[cardName] = jaUrl;
+      const curCol = document.getElementById('ja-img-col');
+      const curImg = document.getElementById('ja-card-img');
+      if (curCol && curImg) { curImg.src = jaUrl; curImg.onclick = () => openLightbox(jaUrl); curCol.style.display = ''; }
+    } else { _jaCache[cardName] = false; }
+  } catch { _jaCache[cardName] = false; }
+}
+
+async function fallbackCardImage(imgEl, cardName) {
+  if (_imgCache[cardName] === false) { imgEl.parentElement.style.display = 'none'; return; }
+  if (_imgCache[cardName]) { imgEl.src = _imgCache[cardName].small; imgEl.onclick = () => openLightbox(_imgCache[cardName].large); return; }
+  try {
+    const q = encodeURIComponent(`name:"${cardName}"`);
+    const resp = await fetch(`https://api.pokemontcg.io/v2/cards?q=${q}&pageSize=1&select=images`);
+    const data = await resp.json();
+    if (data.data && data.data.length > 0) {
+      const imgs = data.data[0].images; _imgCache[cardName] = { small: imgs.small, large: imgs.large };
+      imgEl.src = imgs.small; imgEl.onclick = () => openLightbox(imgs.large);
+    } else { _imgCache[cardName] = false; imgEl.parentElement.style.display = 'none'; }
+  } catch { _imgCache[cardName] = false; imgEl.parentElement.style.display = 'none'; }
+}
+
+async function init() {
+  canvas = document.getElementById('scatter');
+  ctx = canvas.getContext('2d');
+
+  try {
+    const resp = await fetch('data.json');
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    DATA = await resp.json();
+  } catch (err) {
+    const ov = document.getElementById('loading');
+    ov.querySelector('.loading-spinner').style.display = 'none';
+    ov.querySelector('.loading-text').textContent = 'Failed to load card data';
+    ov.querySelector('.loading-text').style.color = '#FF6B6B';
+    return;
+  }
+
+  document.getElementById('stat-cards').textContent = DATA.total_cards;
+  document.getElementById('stat-decks').textContent = DATA.total_decks;
+  document.getElementById('stat-clusters').textContent =
+    Object.keys(DATA.clusters).filter(k => k !== '-1').length;
+
+  buildTabs();
+  resize();
+  fitView();
+  buildLegend();
+  draw();
+  document.getElementById('loading').classList.add('hidden');
+
+  window.addEventListener('resize', () => { resize(); draw(); });
+
+  // Mouse events
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    if (drag.active) {
+      const dxData = (mx - drag.sx) / plotArea().w * (view.xMax - view.xMin);
+      const dyData = (my - drag.sy) / plotArea().h * (view.yMax - view.yMin);
+      view.xMin = drag.vxMin - dxData; view.xMax = drag.vx - dxData;
+      view.yMin = drag.vyMin + dyData; view.yMax = drag.vy + dyData;
+      draw(); return;
+    }
+    const idx = hitTest(mx, my);
+    if (idx !== hoveredIdx) { hoveredIdx = idx; draw(); }
+    canvas.style.cursor = idx >= 0 ? 'pointer' : 'grab';
+    showTooltip(idx, mx, my);
+  });
+
+  canvas.addEventListener('mousedown', e => {
+    const rect = canvas.getBoundingClientRect();
+    drag.active = true; drag.sx = e.clientX - rect.left; drag.sy = e.clientY - rect.top;
+    drag.vx = view.xMax; drag.vy = view.yMax; drag.vxMin = view.xMin; drag.vyMin = view.yMin;
+  });
+
+  canvas.addEventListener('mouseup', e => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    const moved = Math.abs(mx - drag.sx) + Math.abs(my - drag.sy);
+    drag.active = false;
+    if (moved < 4) { const idx = hitTest(mx, my); if (idx >= 0) showClusterPanel(DATA.points[idx].cluster); }
+  });
+
+  canvas.addEventListener('wheel', e => {
+    e.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    const pivot = screenToData(e.clientX - rect.left, e.clientY - rect.top);
+    const factor = e.deltaY > 0 ? 1.12 : 0.88;
+    view.xMin = pivot.x + (view.xMin - pivot.x) * factor; view.xMax = pivot.x + (view.xMax - pivot.x) * factor;
+    view.yMin = pivot.y + (view.yMin - pivot.y) * factor; view.yMax = pivot.y + (view.yMax - pivot.y) * factor;
+    draw();
+  }, { passive: false });
+
+  canvas.addEventListener('mouseleave', () => {
+    hoveredIdx = -1; document.getElementById('tooltip').style.display = 'none'; draw();
+  });
+
+  // Touch events
+  let touch = { active: false, sx: 0, sy: 0, dist: 0 };
+  canvas.addEventListener('touchstart', e => {
+    if (e.touches.length === 1) {
+      touch.active = true; touch.sx = e.touches[0].clientX; touch.sy = e.touches[0].clientY;
+      drag.vx = view.xMax; drag.vy = view.yMax; drag.vxMin = view.xMin; drag.vyMin = view.yMin;
+    } else if (e.touches.length === 2) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      touch.dist = Math.sqrt(dx*dx + dy*dy);
+    }
+  }, { passive: true });
+
+  canvas.addEventListener('touchmove', e => {
+    e.preventDefault();
+    if (e.touches.length === 1 && touch.active) {
+      const mx = e.touches[0].clientX, my = e.touches[0].clientY;
+      const dxD = (mx - touch.sx) / plotArea().w * (drag.vx - drag.vxMin);
+      const dyD = (my - touch.sy) / plotArea().h * (drag.vy - drag.vyMin);
+      view.xMin = drag.vxMin - dxD; view.xMax = drag.vx - dxD;
+      view.yMin = drag.vyMin + dyD; view.yMax = drag.vy + dyD;
+      draw();
+    } else if (e.touches.length === 2) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const nd = Math.sqrt(dx*dx + dy*dy);
+      if (touch.dist > 0) {
+        const f = touch.dist / nd;
+        const cx = (view.xMin + view.xMax)/2, cy = (view.yMin + view.yMax)/2;
+        const hw = (view.xMax - view.xMin)/2*f, hh = (view.yMax - view.yMin)/2*f;
+        view.xMin = cx-hw; view.xMax = cx+hw; view.yMin = cy-hh; view.yMax = cy+hh;
+        draw();
+      }
+      touch.dist = nd;
+    }
+  }, { passive: false });
+
+  canvas.addEventListener('touchend', e => { if (e.touches.length === 0) touch.active = false; }, { passive: true });
+
+  document.getElementById('btn-deselect').onclick = deselectCluster;
+  document.getElementById('btn-back').onclick = () => {
+    if (selectedCluster !== null) showClusterPanel(selectedCluster); else deselectCluster();
+  };
+
+  // Search
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  let searchActiveIdx = -1;
+
+  function doSearch(query) {
+    searchResults.innerHTML = ''; searchActiveIdx = -1;
+    if (!query || query.length < 1) { searchResults.classList.remove('open'); return; }
+    const q = query.toLowerCase();
+    const matches = DATA.points
+      .filter(p => p.card.toLowerCase().includes(q))
+      .sort((a, b) => {
+        const aS = a.card.toLowerCase().startsWith(q) ? 0 : 1;
+        const bS = b.card.toLowerCase().startsWith(q) ? 0 : 1;
+        if (aS !== bS) return aS - bS;
+        return b.meta_share - a.meta_share;
+      }).slice(0, 12);
+
+    if (matches.length === 0) {
+      searchResults.innerHTML = '<div style="padding:10px 12px;color:#666;font-size:13px">No cards found</div>';
+      searchResults.classList.add('open'); return;
+    }
+    matches.forEach((p, i) => {
+      const el = document.createElement('div');
+      el.className = 'sr-item'; el.dataset.index = i;
+      el.innerHTML = `
+        <span class="sr-dot" style="background:${clusterColor(p.cluster)}"></span>
+        <span>${p.card}</span>
+        <span class="sr-meta">${p.meta_share.toFixed(1)}% meta · ${p.win_rate.toFixed(0)}% WR</span>
+      `;
+      el.onclick = () => selectSearchResult(p);
+      searchResults.appendChild(el);
+    });
+    searchResults.classList.add('open');
+  }
+
+  function selectSearchResult(p) {
+    searchResults.classList.remove('open');
+    searchInput.value = p.card;
+    const pad = (view.xMax - view.xMin) * 0.15 || 0.3;
+    const cx = px(p), cy = py(p);
+    view.xMin = cx - pad; view.xMax = cx + pad;
+    view.yMin = cy - pad; view.yMax = cy + pad;
+    showClusterPanel(p.cluster);
+    hoveredIdx = DATA.points.indexOf(p);
+    draw();
+  }
+
+  searchInput.addEventListener('input', () => doSearch(searchInput.value));
+  searchInput.addEventListener('focus', () => { if (searchInput.value) doSearch(searchInput.value); });
+  searchInput.addEventListener('keydown', e => {
+    const items = searchResults.querySelectorAll('.sr-item');
+    if (e.key === 'ArrowDown') { e.preventDefault(); searchActiveIdx = Math.min(searchActiveIdx + 1, items.length - 1); items.forEach((el, i) => el.classList.toggle('active', i === searchActiveIdx)); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); searchActiveIdx = Math.max(searchActiveIdx - 1, 0); items.forEach((el, i) => el.classList.toggle('active', i === searchActiveIdx)); }
+    else if (e.key === 'Enter' && searchActiveIdx >= 0) { e.preventDefault(); items[searchActiveIdx]?.click(); }
+    else if (e.key === 'Escape') { searchResults.classList.remove('open'); searchInput.blur(); }
+  });
+
+  document.addEventListener('click', e => { if (!e.target.closest('.search-wrap')) searchResults.classList.remove('open'); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('open'); });
+}
+
+init();
+</script>
+</body>
+</html>
